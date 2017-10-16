@@ -45,9 +45,17 @@ class BuildExt(build_ext):
         for ext in self.extensions:
             ext.extra_compile_args = opts
 
-        import pip
-        pip.main(['install', 'pybind11'])
-        import pybind11
+        try:
+            import pybind11
+            assert (
+                os.path.isfile(os.path.join(pybind11.get_include(), 'pybind11/pybind11.h')) or
+                os.path.isfile(os.path.join(pybind11.get_include(True), 'pybind11/pybind11.h'))
+            )
+        except:
+            import pip
+            pip.main(['install', 'pybind11>=2.2'])
+            sys.modules.pop('pybind11', None)
+            import pybind11
 
         for ext in self.extensions:
             ext.include_dirs.extend([
@@ -81,7 +89,6 @@ setup(
             language='c++'
         )
     ],
-    # setup_requires=['pybind11 >=2.2'],
     install_requires=['pybind11 >=2.2'],
     cmdclass={'build_ext': BuildExt},
     zip_safe=False
