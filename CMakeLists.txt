@@ -1,7 +1,11 @@
-cmake_minimum_required(VERSION 3.7)
-
+cmake_minimum_required(VERSION 3.0)
 project(leventrie)
 
-set(CMAKE_CXX_STANDARD 11)
-
-add_subdirectory(src/leventrie)
+add_library(leventrie INTERFACE)
+target_sources(leventrie INTERFACE
+    include/leventrie/automaton.h include/leventrie/trie.h)
+target_include_directories(leventrie INTERFACE
+    include/)
+install(FILES
+    include/leventrie/automaton.h include/leventrie/trie.h
+    DESTINATION include/leventrie/)
