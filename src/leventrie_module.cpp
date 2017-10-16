@@ -6,4 +6,5 @@
 namespace py = pybind11;
 
 PYBIND11_MODULE(leventrie, m) {
+    m.attr("test") = 1;
 }
