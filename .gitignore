@@ -1,0 +1,17 @@
+.idea/
+cmake/
+cmake-*/
+*.py[cod]
+__pycache__/
+.tox/
+.cache/
+*.so
+.python-version
+*.ipynb
+.ipynb_checkpoints/
+*.eggs
+var/
+build/
+dist/
+*.egg-info/
+
